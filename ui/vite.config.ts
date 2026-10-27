@@ -33,44 +33,45 @@ const renameHtmlPlugin = (outDir: string, entry: string) => {
 // https://vite.dev/config/
 export default defineConfig((conf: any) => {
   const mode = conf.mode
-  const ENV = loadEnv(mode, envDir)
+  const ENV = loadEnv(mode, envDir, '')
+  const backendTarget = ENV.PROXY_TARGET || 'http://127.0.0.1:8080'
   const proxyConf: Record<string, string | ProxyOptions> = {}
   proxyConf['/admin/api'] = {
-    target: 'http://127.0.0.1:8080',
+    target: backendTarget,
     changeOrigin: true,
   }
   proxyConf['/chat/api'] = {
-    target: 'http://127.0.0.1:8080',
+    target: backendTarget,
     changeOrigin: true,
   }
   proxyConf['/doc'] = {
-    target: 'http://127.0.0.1:8080',
+    target: backendTarget,
     changeOrigin: true,
     rewrite: (path: string) => path.replace(ENV.VITE_BASE_PATH, '/'),
   }
   proxyConf['/schema'] = {
-    target: 'http://127.0.0.1:8080',
+    target: backendTarget,
     changeOrigin: true,
     rewrite: (path: string) => path.replace(ENV.VITE_BASE_PATH, '/'),
   }
   proxyConf['/static'] = {
-    target: 'http://127.0.0.1:8080',
+    target: backendTarget,
     changeOrigin: true,
     rewrite: (path: string) => path.replace(ENV.VITE_BASE_PATH, '/'),
   }
 
   // 前端静态资源转发到本身
   proxyConf[`^${ENV.VITE_BASE_PATH}.+\/oss\/file\/.*$`] = {
-    target: `http://127.0.0.1:8080`,
+    target: backendTarget,
     changeOrigin: true,
   }
   // 前端静态资源转发到本身
   proxyConf[`^${ENV.VITE_BASE_PATH}oss\/file\/.*$`] = {
-    target: `http://127.0.0.1:8080`,
+    target: backendTarget,
     changeOrigin: true,
   }
   proxyConf[`^${ENV.VITE_BASE_PATH}oss\/get_url\/.*$`] = {
-    target: `http://127.0.0.1:8080`,
+    target: backendTarget,
     changeOrigin: true,
   }
   // 前端静态资源转发到本身

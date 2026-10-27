@@ -474,10 +474,8 @@ const importApplication = (file: any) => {
     .catch((e) => {
       if (e.code === 400) {
         MsgConfirm(t('common.tip'), t('views.application.tip.professionalMessage'), {
-          cancelButtonText: t('common.confirm'),
-          confirmButtonText: t('common.professional'),
-        }).then(() => {
-          window.open('https://maxkb.cn/pricing.html', '_blank')
+          confirmButtonText: t('common.confirm'),
+          showCancelButton: false,
         })
       }
     })
@@ -520,10 +518,8 @@ function importKnowledgeBundle(file: any) {
     .catch((e: any) => {
       if (e.code === 400) {
         MsgConfirm(t('common.tip'), t('views.application.tip.professionalMessage'), {
-          cancelButtonText: t('common.confirm'),
-          confirmButtonText: t('common.professional'),
-        }).then(() => {
-          window.open('https://maxkb.cn/pricing.html', '_blank')
+          confirmButtonText: t('common.confirm'),
+          showCancelButton: false,
         })
       }
     })
@@ -550,10 +546,8 @@ function importTool(file: any) {
     .catch((e: any) => {
       if (e.code === 400) {
         MsgConfirm(t('common.tip'), t('views.application.tip.professionalMessage'), {
-          cancelButtonText: t('common.confirm'),
-          confirmButtonText: t('common.professional'),
-        }).then(() => {
-          window.open('https://maxkb.cn/pricing.html', '_blank')
+          confirmButtonText: t('common.confirm'),
+          showCancelButton: false,
         })
       }
     })
