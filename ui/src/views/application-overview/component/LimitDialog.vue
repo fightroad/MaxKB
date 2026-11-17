@@ -94,7 +94,10 @@ watch(dialogVisible, (bool) => {
   }
 })
 
+const tokenData = ref<any>(null)
+
 const open = (data: any) => {
+  tokenData.value = data
   form.value.access_num = data.access_num
   form.value.white_active = data.white_active
   form.value.white_list = data.white_list?.length ? data.white_list?.join('\n') : ''
@@ -113,6 +116,7 @@ const submit = async (formEl: FormInstance | undefined) => {
         access_num: form.value.access_num,
         authentication: form.value.authentication,
         authentication_value: form.value.authentication_value,
+        language: tokenData.value?.language,
       }
       loadSharedApi({ type: 'application', systemType: apiType.value })
         .putAccessToken(id as string, obj, loading)

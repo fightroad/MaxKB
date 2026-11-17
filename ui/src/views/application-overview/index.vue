@@ -404,8 +404,12 @@ async function changeState(bool: boolean) {
 }
 
 async function updateAccessToken(obj: any, str: string) {
+  const payload = {
+    language: accessToken.value?.language,
+    ...obj,
+  }
   loadSharedApi({ type: 'application', systemType: apiType.value })
-    .putAccessToken(id as string, obj, loading)
+    .putAccessToken(id as string, payload, loading)
     .then((res: any) => {
       accessToken.value = res?.data
       MsgSuccess(str)
